@@ -1,6 +1,11 @@
 package com.in28minutes.rest.webservices.springbootdevelopment;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContext;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Locale;
 
 // Here we will make a REST API Which will return Hello world in a specific url
 @RestController
@@ -27,7 +32,22 @@ public class HelloWorldController {
         ));
     }
 
+    //Using MessageSource for Internationalization
 
+
+    private MessageSource messageSource;
+
+    public HelloWorldController(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
+    //Understanding Internationalization
+    //Controller 4 - GET Method
+    @GetMapping(path = "/hello-world/internationalization")
+    public String helloWorldInternationalization(){
+        Locale locale = LocaleContextHolder.getLocale();
+        return messageSource.getMessage("good.morning.message",null,"default Message",locale);
+    }
 }
 
 

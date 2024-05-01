@@ -46,7 +46,7 @@ public class UserResource {
                 .toUri();
         return ResponseEntity.created(location).build();
 
-        //Response Entity is used to get the correct response status as well as to pass our URI details into headers response
+        //Response Entity is used to get the correct HTTP response status as well as to pass our URI details into headers response
         // Here the response will be having the details of URI if we return this
         //All API urls details will be visible in the Headers of the Response Payload
     }
