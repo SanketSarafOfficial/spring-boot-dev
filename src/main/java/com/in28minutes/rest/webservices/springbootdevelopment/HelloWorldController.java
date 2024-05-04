@@ -34,7 +34,6 @@ public class HelloWorldController {
 
     //Using MessageSource for Internationalization
 
-
     private MessageSource messageSource;
 
     public HelloWorldController(MessageSource messageSource) {

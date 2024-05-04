@@ -1,6 +1,8 @@
 package com.in28minutes.rest.webservices.springbootdevelopment.Users;
 
 import jakarta.validation.Valid;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,13 +29,24 @@ public class UserResource {
     }
 
     //This is using a path variable / Path params / path name
+    //Using HATEOAS - EntityModel
     @GetMapping(path="/users/{id}")
-    public User retrieveUserInfoById(@PathVariable  Integer id){
+    public EntityModel<User> retrieveUserInfoById(@PathVariable  Integer id){
         User user = service.findOne(id);
-        if(user == null){ // user == null means there is no record for a oparticular user
+        if(user == null){ // user == null means there is no record for a particular user
             throw new UserNotFoundException("UserNotFoundException :: User Id is not found " + id);
         }
-        return user;
+
+        EntityModel<User> entityModel = EntityModel.of(user);
+
+        //Next steps is to generate links for our EntityModel
+        //we use WebMvcLinkBuilder for that.
+        //We will link this RestController with some of its controller method
+        WebMvcLinkBuilder link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUser());
+
+        //After link is created , add that to entity Model
+        entityModel.add(link.withRel("all-details"));
+        return entityModel;
     }
 
     @PostMapping("/users")

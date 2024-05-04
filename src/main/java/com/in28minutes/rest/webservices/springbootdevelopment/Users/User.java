@@ -1,5 +1,6 @@
 package com.in28minutes.rest.webservices.springbootdevelopment.Users;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
@@ -8,10 +9,11 @@ import java.time.LocalDate;
 // where we will be having our getters and setters and other classes such as Component class & Rest Controller class will use these getters and setters
 public class User {
     private Integer id;
-
     @Size(min=3 , message = "name should be at-least 2 characters long")
+    @JsonProperty("User_Name")
     private String name;
     @Past
+    @JsonProperty("Birth_Date")
     private LocalDate birthDate;
 
     public User(Integer id, String name, LocalDate birthDate) {
