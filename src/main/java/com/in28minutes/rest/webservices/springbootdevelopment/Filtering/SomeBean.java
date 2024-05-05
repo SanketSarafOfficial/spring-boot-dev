@@ -1,14 +1,17 @@
 package com.in28minutes.rest.webservices.springbootdevelopment.Filtering;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties("field1")
+//@JsonIgnoreProperties("field3") // for a single field
+//@JsonIgnoreProperties({"field1","field3"}) // use arrayType {} if you have many fields
+@JsonFilter("SomeBeanFilter")
 public class SomeBean {
     private String field1;
     //Static filtering
     //here I don't want to show this field to users
-    @JsonIgnore
+//    @JsonIgnore
     private String field2;
     private String field3;
 

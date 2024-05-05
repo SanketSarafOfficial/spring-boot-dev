@@ -30,6 +30,7 @@ public class UserResource {
 
     //This is using a path variable / Path params / path name
     //Using HATEOAS - EntityModel
+    //HATEOAS - will show HAL responses with hyperlink to the resources being used
     @GetMapping(path="/users/{id}")
     public EntityModel<User> retrieveUserInfoById(@PathVariable  Integer id){
         User user = service.findOne(id);
@@ -41,8 +42,9 @@ public class UserResource {
 
         //Next steps is to generate links for our EntityModel
         //we use WebMvcLinkBuilder for that.
-        //We will link this RestController with some of its controller method
-        WebMvcLinkBuilder link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUser());
+        //We will link this RestController with some of its controller method (You can use any method)
+
+        WebMvcLinkBuilder link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveUserInfoById(id));
 
         //After link is created , add that to entity Model
         entityModel.add(link.withRel("all-details"));
