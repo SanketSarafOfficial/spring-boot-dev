@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.List;
 
+//This is dynamic filtering code for the controller class
 @RestController
 public class FilteringController {
 

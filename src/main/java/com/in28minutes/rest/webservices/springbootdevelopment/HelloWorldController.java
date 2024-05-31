@@ -33,9 +33,10 @@ public class HelloWorldController {
     }
 
     //Using MessageSource for Internationalization
-
+    //This is the dependency for Internationalization
     private MessageSource messageSource;
 
+    //Constructor of the message sources
     public HelloWorldController(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
